@@ -16,7 +16,6 @@
 package userdata
 
 import (
-	"bytes"
 	"encoding/binary"
 )
 
@@ -63,9 +62,10 @@ func Get(udata []byte, styp Type) []byte {
 }
 
 func AppendUint32(udata []byte, typ Type, num uint32) []byte {
-	data := binary.LittleEndian.AppendUint32(nil, num)
+	var data [4]byte
+	binary.LittleEndian.PutUint32(data[:], num)
 
-	return Append(udata, typ, data)
+	return Append(udata, typ, data[:])
 }
 
 func GetUint32(udata []byte, typ Type) (uint32, bool) {
@@ -88,7 +88,9 @@ func GetString(udata []byte, typ Type) (string, bool) {
 		return "", false
 	}
 
-	data, _ = bytes.CutSuffix(data, []byte{0})
+	if data[len(data)-1] == 0 {
+		data = data[:len(data)-1]
+	}
 
 	return string(data), true
 }

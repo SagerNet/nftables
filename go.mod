@@ -1,9 +1,10 @@
 module github.com/google/nftables
 
-go 1.20
+go 1.18
 
 require (
 	github.com/mdlayher/netlink v1.7.2
+	github.com/sagernet/sing v0.4.0
 	github.com/vishvananda/netns v0.0.4
 	golang.org/x/sys v0.20.0
 )

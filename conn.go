@@ -24,6 +24,7 @@ import (
 	"github.com/google/nftables/expr"
 	"github.com/mdlayher/netlink"
 	"github.com/mdlayher/netlink/nltest"
+	E "github.com/sagernet/sing/common/exceptions"
 	"golang.org/x/sys/unix"
 )
 
@@ -258,7 +259,7 @@ func (cc *Conn) Flush() error {
 				// Kernel will only send one permission error to user space.
 				return err
 			}
-			errs = errors.Join(errs, err)
+			errs = E.Errors(errs, err)
 		}
 	}
 
