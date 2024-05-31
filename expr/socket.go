@@ -19,7 +19,7 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/google/nftables/binaryutil"
+	"github.com/sagernet/nftables/binaryutil"
 	"github.com/mdlayher/netlink"
 )
 

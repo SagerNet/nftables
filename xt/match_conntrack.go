@@ -3,7 +3,7 @@ package xt
 import (
 	"net"
 
-	"github.com/google/nftables/alignedbuff"
+	"github.com/sagernet/nftables/alignedbuff"
 )
 
 type ConntrackFlags uint16

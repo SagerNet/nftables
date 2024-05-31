@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/google/nftables/xt"
+	"github.com/sagernet/nftables/xt"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )
