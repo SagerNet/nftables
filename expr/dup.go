@@ -38,7 +38,6 @@ func (e *Dup) marshal(fam byte) ([]byte, error) {
 	}
 
 	data, err := netlink.MarshalAttributes(attrs)
-
 	if err != nil {
 		return nil, err
 	}

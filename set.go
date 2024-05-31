@@ -21,10 +21,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/nftables/binaryutil"
 	"github.com/google/nftables/expr"
 	"github.com/google/nftables/internal/parseexprfunc"
-
-	"github.com/google/nftables/binaryutil"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )
@@ -178,8 +177,10 @@ var (
 	sizeOfGIDT uint32 = 4
 )
 
-var nftDatatypesByName map[string]SetDatatype
-var nftDatatypesByMagic map[uint32]SetDatatype
+var (
+	nftDatatypesByName  map[string]SetDatatype
+	nftDatatypesByMagic map[uint32]SetDatatype
+)
 
 // Create maps for efficient datatype lookup.
 func init() {
@@ -435,7 +436,8 @@ func (s *Set) makeElemList(vals []SetElement, id uint32) ([]netlink.Attribute, e
 				encodedVal = append(encodedVal, encodedChain...)
 			}
 			encodedVerdict, err := netlink.MarshalAttributes([]netlink.Attribute{
-				{Type: unix.NFTA_SET_ELEM_DATA | unix.NLA_F_NESTED, Data: encodedVal}})
+				{Type: unix.NFTA_SET_ELEM_DATA | unix.NLA_F_NESTED, Data: encodedVal},
+			})
 			if err != nil {
 				return nil, fmt.Errorf("marshal item %d: %v", i, err)
 			}

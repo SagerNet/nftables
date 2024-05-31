@@ -29,7 +29,6 @@ func TestMatchTcp(t *testing.T) {
 			data, err := tt.info.marshal(0, 0)
 			if err != nil {
 				t.Fatalf("marshal error: %+v", err)
-
 			}
 			var recoveredInfo InfoAny = &Tcp{}
 			err = recoveredInfo.unmarshal(0, 0, data)

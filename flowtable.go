@@ -74,11 +74,9 @@ func FlowtableHookRef(h FlowtableHook) *FlowtableHook {
 	return &h
 }
 
-var (
-	// Only ingress is supported
-	// https://github.com/torvalds/linux/blob/b72018ab8236c3ae427068adeb94bdd3f20454ec/net/netfilter/nf_tables_api.c#L7378-L7379
-	FlowtableHookIngress *FlowtableHook = FlowtableHookRef(unix.NF_NETDEV_INGRESS)
-)
+// Only ingress is supported
+// https://github.com/torvalds/linux/blob/b72018ab8236c3ae427068adeb94bdd3f20454ec/net/netfilter/nf_tables_api.c#L7378-L7379
+var FlowtableHookIngress *FlowtableHook = FlowtableHookRef(unix.NF_NETDEV_INGRESS)
 
 type FlowtablePriority int32
 
@@ -86,12 +84,10 @@ func FlowtablePriorityRef(p FlowtablePriority) *FlowtablePriority {
 	return &p
 }
 
-var (
-	// As per man page:
-	// The priority can be a signed integer or filter which stands for 0. Addition and subtraction can be used to set relative priority, e.g. filter + 5 equals to 5.
-	// https://git.netfilter.org/nftables/tree/doc/nft.txt?id=8c600a843b7c0c1cc275ecc0603bd1fc57773e98#n712
-	FlowtablePriorityFilter *FlowtablePriority = FlowtablePriorityRef(0)
-)
+// As per man page:
+// The priority can be a signed integer or filter which stands for 0. Addition and subtraction can be used to set relative priority, e.g. filter + 5 equals to 5.
+// https://git.netfilter.org/nftables/tree/doc/nft.txt?id=8c600a843b7c0c1cc275ecc0603bd1fc57773e98#n712
+var FlowtablePriorityFilter *FlowtablePriority = FlowtablePriorityRef(0)
 
 type Flowtable struct {
 	Table    *Table

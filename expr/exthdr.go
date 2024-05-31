@@ -46,10 +46,12 @@ func (e *Exthdr) marshal(fam byte) ([]byte, error) {
 	// or DestRegister is set. Mixing them results in EOPNOTSUPP.
 	if e.SourceRegister != 0 {
 		attr = []netlink.Attribute{
-			{Type: unix.NFTA_EXTHDR_SREG, Data: binaryutil.BigEndian.PutUint32(e.SourceRegister)}}
+			{Type: unix.NFTA_EXTHDR_SREG, Data: binaryutil.BigEndian.PutUint32(e.SourceRegister)},
+		}
 	} else {
 		attr = []netlink.Attribute{
-			{Type: unix.NFTA_EXTHDR_DREG, Data: binaryutil.BigEndian.PutUint32(e.DestRegister)}}
+			{Type: unix.NFTA_EXTHDR_DREG, Data: binaryutil.BigEndian.PutUint32(e.DestRegister)},
+		}
 	}
 
 	attr = append(attr,

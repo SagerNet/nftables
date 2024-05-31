@@ -17,10 +17,9 @@ package expr
 import (
 	"encoding/binary"
 
-	"golang.org/x/sys/unix"
-
 	"github.com/google/nftables/binaryutil"
 	"github.com/mdlayher/netlink"
+	"golang.org/x/sys/unix"
 )
 
 type Socket struct {

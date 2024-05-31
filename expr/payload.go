@@ -22,9 +22,11 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type PayloadBase uint32
-type PayloadCsumType uint32
-type PayloadOperationType uint32
+type (
+	PayloadBase          uint32
+	PayloadCsumType      uint32
+	PayloadOperationType uint32
+)
 
 // Possible PayloadBase values.
 const (
@@ -58,7 +60,6 @@ type Payload struct {
 }
 
 func (e *Payload) marshal(fam byte) ([]byte, error) {
-
 	var attrs []netlink.Attribute
 
 	if e.OperationType == PayloadWrite {
@@ -90,7 +91,6 @@ func (e *Payload) marshal(fam byte) ([]byte, error) {
 	}
 
 	data, err := netlink.MarshalAttributes(attrs)
-
 	if err != nil {
 		return nil, err
 	}

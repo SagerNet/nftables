@@ -23,7 +23,6 @@ func TestUnknown(t *testing.T) {
 			data, err := tt.info.marshal(0, 0)
 			if err != nil {
 				t.Fatalf("marshal error: %+v", err)
-
 			}
 			var recoveredInfo InfoAny = &Unknown{}
 			err = recoveredInfo.unmarshal(0, 0, data)
