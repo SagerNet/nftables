@@ -26,11 +26,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/nftables"
-	"github.com/google/nftables/binaryutil"
-	"github.com/google/nftables/expr"
-	"github.com/google/nftables/internal/nftest"
-	"github.com/google/nftables/xt"
+	"github.com/sagernet/nftables"
+	"github.com/sagernet/nftables/binaryutil"
+	"github.com/sagernet/nftables/expr"
+	"github.com/sagernet/nftables/internal/nftest"
+	"github.com/sagernet/nftables/xt"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )
@@ -2249,13 +2249,11 @@ func TestObjAPI(t *testing.T) {
 	}
 
 	_, err = c.ResetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.ResetObjects(table) failed: %v failed", err)
 	}
 
 	obj1, err = c.GetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter1) failed: %v failed", err)
 	}
@@ -2265,7 +2263,6 @@ func TestObjAPI(t *testing.T) {
 	}
 
 	obj2, err = c.GetObject(counter2)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter2) failed: %v failed", err)
 	}

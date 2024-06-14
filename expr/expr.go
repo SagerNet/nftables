@@ -18,8 +18,8 @@ package expr
 import (
 	"encoding/binary"
 
-	"github.com/google/nftables/binaryutil"
-	"github.com/google/nftables/internal/parseexprfunc"
+	"github.com/sagernet/nftables/binaryutil"
+	"github.com/sagernet/nftables/internal/parseexprfunc"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )
