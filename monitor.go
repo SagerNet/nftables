@@ -47,49 +47,47 @@ const (
 	MonitorObjectAny  MonitorObject = MonitorObjectMask
 )
 
-var (
-	monitorFlags = map[MonitorAction]map[MonitorObject]uint32{
-		MonitorActionAny: {
-			MonitorObjectAny:      0xffffffff,
-			MonitorObjectTables:   1<<unix.NFT_MSG_NEWTABLE | 1<<unix.NFT_MSG_DELTABLE,
-			MonitorObjectChains:   1<<unix.NFT_MSG_NEWCHAIN | 1<<unix.NFT_MSG_DELCHAIN,
-			MonitorObjectRules:    1<<unix.NFT_MSG_NEWRULE | 1<<unix.NFT_MSG_DELRULE,
-			MonitorObjectSets:     1<<unix.NFT_MSG_NEWSET | 1<<unix.NFT_MSG_DELSET,
-			MonitorObjectElements: 1<<unix.NFT_MSG_NEWSETELEM | 1<<unix.NFT_MSG_DELSETELEM,
-			MonitorObjectRuleset: 1<<unix.NFT_MSG_NEWTABLE | 1<<unix.NFT_MSG_DELTABLE |
-				1<<unix.NFT_MSG_NEWCHAIN | 1<<unix.NFT_MSG_DELCHAIN |
-				1<<unix.NFT_MSG_NEWRULE | 1<<unix.NFT_MSG_DELRULE |
-				1<<unix.NFT_MSG_NEWSET | 1<<unix.NFT_MSG_DELSET |
-				1<<unix.NFT_MSG_NEWSETELEM | 1<<unix.NFT_MSG_DELSETELEM |
-				1<<unix.NFT_MSG_NEWOBJ | 1<<unix.NFT_MSG_DELOBJ,
-		},
-		MonitorActionNew: {
-			MonitorObjectAny: 1<<unix.NFT_MSG_NEWTABLE |
-				1<<unix.NFT_MSG_NEWCHAIN |
-				1<<unix.NFT_MSG_NEWRULE |
-				1<<unix.NFT_MSG_NEWSET |
-				1<<unix.NFT_MSG_NEWSETELEM,
-			MonitorObjectTables: 1 << unix.NFT_MSG_NEWTABLE,
-			MonitorObjectChains: 1 << unix.NFT_MSG_NEWCHAIN,
-			MonitorObjectRules:  1 << unix.NFT_MSG_NEWRULE,
-			MonitorObjectSets:   1 << unix.NFT_MSG_NEWSET,
-			MonitorObjectRuleset: 1<<unix.NFT_MSG_NEWTABLE |
-				1<<unix.NFT_MSG_NEWCHAIN |
-				1<<unix.NFT_MSG_NEWRULE |
-				1<<unix.NFT_MSG_NEWSET |
-				1<<unix.NFT_MSG_NEWSETELEM |
-				1<<unix.NFT_MSG_NEWOBJ,
-		},
-		MonitorActionDel: {
-			MonitorObjectAny: 1<<unix.NFT_MSG_DELTABLE |
-				1<<unix.NFT_MSG_DELCHAIN |
-				1<<unix.NFT_MSG_DELRULE |
-				1<<unix.NFT_MSG_DELSET |
-				1<<unix.NFT_MSG_DELSETELEM |
-				1<<unix.NFT_MSG_DELOBJ,
-		},
-	}
-)
+var monitorFlags = map[MonitorAction]map[MonitorObject]uint32{
+	MonitorActionAny: {
+		MonitorObjectAny:      0xffffffff,
+		MonitorObjectTables:   1<<unix.NFT_MSG_NEWTABLE | 1<<unix.NFT_MSG_DELTABLE,
+		MonitorObjectChains:   1<<unix.NFT_MSG_NEWCHAIN | 1<<unix.NFT_MSG_DELCHAIN,
+		MonitorObjectRules:    1<<unix.NFT_MSG_NEWRULE | 1<<unix.NFT_MSG_DELRULE,
+		MonitorObjectSets:     1<<unix.NFT_MSG_NEWSET | 1<<unix.NFT_MSG_DELSET,
+		MonitorObjectElements: 1<<unix.NFT_MSG_NEWSETELEM | 1<<unix.NFT_MSG_DELSETELEM,
+		MonitorObjectRuleset: 1<<unix.NFT_MSG_NEWTABLE | 1<<unix.NFT_MSG_DELTABLE |
+			1<<unix.NFT_MSG_NEWCHAIN | 1<<unix.NFT_MSG_DELCHAIN |
+			1<<unix.NFT_MSG_NEWRULE | 1<<unix.NFT_MSG_DELRULE |
+			1<<unix.NFT_MSG_NEWSET | 1<<unix.NFT_MSG_DELSET |
+			1<<unix.NFT_MSG_NEWSETELEM | 1<<unix.NFT_MSG_DELSETELEM |
+			1<<unix.NFT_MSG_NEWOBJ | 1<<unix.NFT_MSG_DELOBJ,
+	},
+	MonitorActionNew: {
+		MonitorObjectAny: 1<<unix.NFT_MSG_NEWTABLE |
+			1<<unix.NFT_MSG_NEWCHAIN |
+			1<<unix.NFT_MSG_NEWRULE |
+			1<<unix.NFT_MSG_NEWSET |
+			1<<unix.NFT_MSG_NEWSETELEM,
+		MonitorObjectTables: 1 << unix.NFT_MSG_NEWTABLE,
+		MonitorObjectChains: 1 << unix.NFT_MSG_NEWCHAIN,
+		MonitorObjectRules:  1 << unix.NFT_MSG_NEWRULE,
+		MonitorObjectSets:   1 << unix.NFT_MSG_NEWSET,
+		MonitorObjectRuleset: 1<<unix.NFT_MSG_NEWTABLE |
+			1<<unix.NFT_MSG_NEWCHAIN |
+			1<<unix.NFT_MSG_NEWRULE |
+			1<<unix.NFT_MSG_NEWSET |
+			1<<unix.NFT_MSG_NEWSETELEM |
+			1<<unix.NFT_MSG_NEWOBJ,
+	},
+	MonitorActionDel: {
+		MonitorObjectAny: 1<<unix.NFT_MSG_DELTABLE |
+			1<<unix.NFT_MSG_DELCHAIN |
+			1<<unix.NFT_MSG_DELRULE |
+			1<<unix.NFT_MSG_DELSET |
+			1<<unix.NFT_MSG_DELSETELEM |
+			1<<unix.NFT_MSG_DELOBJ,
+	},
+}
 
 type MonitorEventType int
 

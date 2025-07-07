@@ -3,6 +3,7 @@ package nftables
 import (
 	"encoding/binary"
 	"fmt"
+
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )

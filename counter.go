@@ -50,6 +50,7 @@ func (c *CounterObj) data() expr.Any {
 func (c *CounterObj) name() string {
 	return c.Name
 }
+
 func (c *CounterObj) objType() ObjType {
 	return ObjTypeCounter
 }

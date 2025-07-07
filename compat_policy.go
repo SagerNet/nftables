@@ -7,8 +7,10 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-const nft_RULE_COMPAT_F_INV uint32 = (1 << 1)
-const nft_RULE_COMPAT_F_MASK uint32 = nft_RULE_COMPAT_F_INV
+const (
+	nft_RULE_COMPAT_F_INV  uint32 = (1 << 1)
+	nft_RULE_COMPAT_F_MASK uint32 = nft_RULE_COMPAT_F_INV
+)
 
 // Used by xt match or target like xt_tcpudp to set compat policy between xtables and nftables
 // https://elixir.bootlin.com/linux/v5.12/source/net/netfilter/nft_compat.c#L187

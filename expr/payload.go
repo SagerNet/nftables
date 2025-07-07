@@ -22,9 +22,11 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type PayloadBase uint32
-type PayloadCsumType uint32
-type PayloadOperationType uint32
+type (
+	PayloadBase          uint32
+	PayloadCsumType      uint32
+	PayloadOperationType uint32
+)
 
 // Possible PayloadBase values.
 const (

@@ -2748,13 +2748,11 @@ func TestObjAPI(t *testing.T) {
 	}
 
 	_, err = c.ResetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.ResetObjects(table) failed: %v failed", err)
 	}
 
 	obj1, err = c.GetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter1) failed: %v failed", err)
 	}
@@ -2764,7 +2762,6 @@ func TestObjAPI(t *testing.T) {
 	}
 
 	obj2, err = c.GetObject(counter2)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter2) failed: %v failed", err)
 	}
@@ -3101,13 +3098,11 @@ func TestObjAPICounterLegacyType(t *testing.T) {
 	}
 
 	_, err = c.ResetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.ResetObjects(table) failed: %v failed", err)
 	}
 
 	obj1, err = c.GetObject(counter1)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter1) failed: %v failed", err)
 	}
@@ -3117,7 +3112,6 @@ func TestObjAPICounterLegacyType(t *testing.T) {
 	}
 
 	obj2, err = c.GetObject(counter2)
-
 	if err != nil {
 		t.Errorf("c.GetObject(counter2) failed: %v failed", err)
 	}
@@ -7911,6 +7905,7 @@ func TestNftablesDeadlock(t *testing.T) {
 		})
 	}
 }
+
 func TestSetElementComment(t *testing.T) {
 	// Create a new network namespace to test these operations
 	conn, newNS := nftest.OpenSystemConn(t, *enableSysTests)

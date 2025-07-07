@@ -46,7 +46,6 @@ func TestCt(t *testing.T) {
 			data, err := tt.ct.marshal(0 /* don't care in this test */)
 			if err != nil {
 				t.Fatalf("marshal error: %+v", err)
-
 			}
 			ad, err := netlink.NewAttributeDecoder(data)
 			if err != nil {

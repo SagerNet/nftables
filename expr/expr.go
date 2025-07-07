@@ -376,7 +376,8 @@ func (e *Masq) marshalData(fam byte) ([]byte, error) {
 		}
 		if flags != 0 {
 			flagsData, err := netlink.MarshalAttributes([]netlink.Attribute{
-				{Type: unix.NFTA_MASQ_FLAGS, Data: binaryutil.BigEndian.PutUint32(flags)}})
+				{Type: unix.NFTA_MASQ_FLAGS, Data: binaryutil.BigEndian.PutUint32(flags)},
+			})
 			if err != nil {
 				return nil, err
 			}
@@ -384,14 +385,16 @@ func (e *Masq) marshalData(fam byte) ([]byte, error) {
 		}
 	} else {
 		regsData, err := netlink.MarshalAttributes([]netlink.Attribute{
-			{Type: unix.NFTA_MASQ_REG_PROTO_MIN, Data: binaryutil.BigEndian.PutUint32(e.RegProtoMin)}})
+			{Type: unix.NFTA_MASQ_REG_PROTO_MIN, Data: binaryutil.BigEndian.PutUint32(e.RegProtoMin)},
+		})
 		if err != nil {
 			return nil, err
 		}
 		msgData = append(msgData, regsData...)
 		if e.RegProtoMax != 0 {
 			regsData, err := netlink.MarshalAttributes([]netlink.Attribute{
-				{Type: unix.NFTA_MASQ_REG_PROTO_MAX, Data: binaryutil.BigEndian.PutUint32(e.RegProtoMax)}})
+				{Type: unix.NFTA_MASQ_REG_PROTO_MAX, Data: binaryutil.BigEndian.PutUint32(e.RegProtoMax)},
+			})
 			if err != nil {
 				return nil, err
 			}

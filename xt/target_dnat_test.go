@@ -82,7 +82,6 @@ func TestTargetDNAT(t *testing.T) {
 			data, err := tt.info.marshal(TableFamily(tt.fam), tt.rev)
 			if err != nil {
 				t.Fatalf("marshal error: %+v", err)
-
 			}
 			var recoveredInfo InfoAny = tt.empty
 			err = recoveredInfo.unmarshal(TableFamily(tt.fam), tt.rev, data)

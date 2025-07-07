@@ -289,10 +289,12 @@ func (a *AlignedBuff) alignWrite(m int) {
 }
 
 // This is ... ugly.
-var uint16AlignMask = int(unsafe.Alignof(uint16(0)) - 1)
-var uint32AlignMask = int(unsafe.Alignof(uint32(0)) - 1)
-var uint64AlignMask = int(unsafe.Alignof(uint64(0)) - 1)
-var padding = bytes.Repeat([]byte{0}, uint64AlignMask)
+var (
+	uint16AlignMask = int(unsafe.Alignof(uint16(0)) - 1)
+	uint32AlignMask = int(unsafe.Alignof(uint32(0)) - 1)
+	uint64AlignMask = int(unsafe.Alignof(uint64(0)) - 1)
+	padding         = bytes.Repeat([]byte{0}, uint64AlignMask)
+)
 
 var int32AlignMask = int(unsafe.Alignof(int32(0)) - 1)
 
