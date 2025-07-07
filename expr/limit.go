@@ -19,8 +19,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/google/nftables/binaryutil"
 	"github.com/mdlayher/netlink"
+	"github.com/sagernet/nftables/binaryutil"
 	"golang.org/x/sys/unix"
 )
 

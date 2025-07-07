@@ -1,4 +1,4 @@
-module github.com/google/nftables
+module github.com/sagernet/nftables
 
 go 1.21
 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net"
 
-	"github.com/google/nftables/alignedbuff"
+	"github.com/sagernet/nftables/alignedbuff"
 )
 
 // See https://elixir.bootlin.com/linux/v5.17.7/source/include/uapi/linux/netfilter/nf_nat.h#L25

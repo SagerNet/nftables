@@ -21,11 +21,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/nftables/binaryutil"
-	"github.com/google/nftables/expr"
-	"github.com/google/nftables/internal/parseexprfunc"
-	"github.com/google/nftables/userdata"
 	"github.com/mdlayher/netlink"
+	"github.com/sagernet/nftables/binaryutil"
+	"github.com/sagernet/nftables/expr"
+	"github.com/sagernet/nftables/internal/parseexprfunc"
+	"github.com/sagernet/nftables/userdata"
 	"golang.org/x/sys/unix"
 )
 
