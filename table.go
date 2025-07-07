@@ -15,8 +15,10 @@
 package nftables
 
 import (
+	"encoding/binary"
 	"fmt"
 
+	"github.com/google/nftables/binaryutil"
 	"github.com/mdlayher/netlink"
 	"golang.org/x/sys/unix"
 )
@@ -55,7 +57,7 @@ func (cc *Conn) DelTable(t *Table) {
 	defer cc.mu.Unlock()
 	data := cc.marshalAttr([]netlink.Attribute{
 		{Type: unix.NFTA_TABLE_NAME, Data: []byte(t.Name + "\x00")},
-		{Type: unix.NFTA_TABLE_FLAGS, Data: []byte{0, 0, 0, 0}},
+		{Type: unix.NFTA_TABLE_FLAGS, Data: binaryutil.BigEndian.PutUint32(t.Flags)},
 	})
 	cc.messages = append(cc.messages, netlink.Message{
 		Header: netlink.Header{
@@ -71,7 +73,7 @@ func (cc *Conn) addTable(t *Table, flag netlink.HeaderFlags) *Table {
 	defer cc.mu.Unlock()
 	data := cc.marshalAttr([]netlink.Attribute{
 		{Type: unix.NFTA_TABLE_NAME, Data: []byte(t.Name + "\x00")},
-		{Type: unix.NFTA_TABLE_FLAGS, Data: []byte{0, 0, 0, 0}},
+		{Type: unix.NFTA_TABLE_FLAGS, Data: binaryutil.BigEndian.PutUint32(t.Flags)},
 	})
 	cc.messages = append(cc.messages, netlink.Message{
 		Header: netlink.Header{
@@ -196,6 +198,7 @@ func tableFromMsg(msg netlink.Message) (*Table, error) {
 	if err != nil {
 		return nil, err
 	}
+	ad.ByteOrder = binary.BigEndian
 
 	for ad.Next() {
 		switch ad.Type() {
