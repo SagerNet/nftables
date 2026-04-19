@@ -624,12 +624,12 @@ func (cc *Conn) AddSet(s *Set, vals []SetElement) error {
 	// https://git.netfilter.org/libnftnl/tree/include/udata.h#n17
 	var userData []byte
 
-	if s.Anonymous || s.Constant || s.Interval || s.KeyByteOrder == binaryutil.BigEndian {
-		// Semantically useless - kept for binary compatability with nft
-		userData = userdata.AppendUint32(userData, userdata.NFTNL_UDATA_SET_KEYBYTEORDER, 2)
-	} else if s.KeyByteOrder == binaryutil.NativeEndian {
+	if s.KeyByteOrder == binaryutil.NativeEndian {
 		// Per https://git.netfilter.org/nftables/tree/src/mnl.c?id=187c6d01d35722618c2711bbc49262c286472c8f#n1165
 		userData = userdata.AppendUint32(userData, userdata.NFTNL_UDATA_SET_KEYBYTEORDER, 1)
+	} else if s.Anonymous || s.Constant || s.Interval || s.KeyByteOrder == binaryutil.BigEndian {
+		// Semantically useless - kept for binary compatability with nft
+		userData = userdata.AppendUint32(userData, userdata.NFTNL_UDATA_SET_KEYBYTEORDER, 2)
 	}
 
 	if s.Interval && s.AutoMerge {
