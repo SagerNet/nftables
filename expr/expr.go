@@ -195,6 +195,8 @@ func exprFromName(name string) Any {
 		e = &Reject{}
 	case "masq":
 		e = &Masq{}
+	case "fullcone":
+		e = &FullCone{}
 	case "hash":
 		e = &Hash{}
 	case "cthelper":
