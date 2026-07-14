@@ -259,7 +259,30 @@ func (cc *Conn) Flush() error {
 	}
 	defer func() { _ = closer() }()
 
-	if _, err := conn.SendMessages(batch(cc.messages)); err != nil {
+	batchMessages := batch(cc.messages)
+	_, err = conn.SendMessages(batchMessages)
+	if errors.Is(err, syscall.EMSGSIZE) {
+		const netlinkReplyBufferOverhead = 1024
+		var batchSize int
+		for _, message := range batchMessages {
+			messageData, marshalErr := message.MarshalBinary()
+			if marshalErr != nil {
+				return fmt.Errorf("marshal netlink message: %w", marshalErr)
+			}
+			batchSize += len(messageData)
+		}
+		readBufferSize := batchSize*2 + len(batchMessages)*netlinkReplyBufferOverhead
+		err = conn.SetReadBuffer(readBufferSize)
+		if err != nil {
+			return fmt.Errorf("SetReadBuffer: %w", err)
+		}
+		err = conn.SetWriteBuffer(batchSize * 2)
+		if err != nil {
+			return fmt.Errorf("SetWriteBuffer: %w", err)
+		}
+		_, err = conn.SendMessages(batchMessages)
+	}
+	if err != nil {
 		return fmt.Errorf("SendMessages: %w", err)
 	}
 
