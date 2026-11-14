@@ -259,10 +259,11 @@ func (cc *Conn) Flush() error {
 	}
 	defer func() { _ = closer() }()
 
+	const netlinkReplyBufferOverhead = 1024
 	batchMessages := batch(cc.messages)
+	growReadBuffer(conn, len(batchMessages)*netlinkReplyBufferOverhead)
 	_, err = conn.SendMessages(batchMessages)
 	if errors.Is(err, syscall.EMSGSIZE) {
-		const netlinkReplyBufferOverhead = 1024
 		var batchSize int
 		for _, message := range batchMessages {
 			messageData, marshalErr := message.MarshalBinary()
@@ -303,6 +304,21 @@ func (cc *Conn) Flush() error {
 	}
 
 	return nil
+}
+
+func growReadBuffer(conn *netlink.Conn, size int) {
+	rawConn, err := conn.SyscallConn()
+	if err != nil {
+		return
+	}
+	var readBufferSize int
+	_ = rawConn.Control(func(fd uintptr) {
+		readBufferSize, _ = unix.GetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_RCVBUF)
+	})
+	if readBufferSize >= size*2 {
+		return
+	}
+	_ = conn.SetReadBuffer(size)
 }
 
 // FlushRuleset flushes the entire ruleset. See also
